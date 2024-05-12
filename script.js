@@ -85,8 +85,12 @@ function saveProgressToCookie() {
     // Convert progressData object to a JSON string
     let progressDataString = JSON.stringify(progressData);
 
-    // Save progressDataString to a cookie named 'skillProgress'
-    document.cookie = `skillProgress=${progressDataString}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+    // Set expiration date 1 year from now
+    let expirationDate = new Date();
+    expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+
+    // Save progressDataString to a cookie named 'skillProgress' with expiration date
+    document.cookie = `skillProgress=${progressDataString}; expires=${expirationDate.toUTCString()}`;
 }
 
 // Load data from browser cookies

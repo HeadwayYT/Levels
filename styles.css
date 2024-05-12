@@ -93,7 +93,7 @@ h2 {
       0 0 6px #19FF19, /* Inner glow */
       0 0 9px #19FF19, /* Middle glow */
       0 0 12px #19FF19; /* Outer glow */
-  animation: pulsate 1.5s ease-in-out infinite;
+  animation: pulsate 0.5s ease-in-out infinite;
 }
 
 @keyframes pulsate {
