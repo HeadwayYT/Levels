@@ -38,7 +38,7 @@ function addXP(skill) {
             progressDiv.classList.remove('progress-bar');
         }, 500); // Duration of the animation (same as CSS transition duration)
     }
-    saveProgressToCookie(); // Save progress after adding XP
+    saveProgressToLocalStorage(); // Save progress after adding XP
 }
 
 // Function to remove experience points
@@ -66,11 +66,11 @@ function remXP(skill) {
 
     // Update the progress bar width
     progressDiv.style.width = newWidth + '%';
-    saveProgressToCookie(); // Save progress after removing XP
+    saveProgressToLocalStorage(); // Save progress after removing XP
 }
 
-// Save data to browser cookies
-function saveProgressToCookie() {
+// Save data to local storage
+function saveProgressToLocalStorage() {
     let skills = document.querySelectorAll('.skill-container');
     let progressData = {};
 
@@ -82,37 +82,23 @@ function saveProgressToCookie() {
         progressData[skillName] = { level, xpWidth };
     });
 
-    // Convert progressData object to a JSON string
-    let progressDataString = JSON.stringify(progressData);
-
-    // Set expiration date to a year from now
-    let expirationDate = new Date();
-    expirationDate.setFullYear(expirationDate.getFullYear() + 1);
-
-    // Save progressDataString to a cookie named 'skillProgress' with expiration date
-    document.cookie = `skillProgress=${progressDataString}; expires=${expirationDate.toUTCString()}; path=/`;
+    localStorage.setItem('skillProgress', JSON.stringify(progressData));
 }
 
-// Load data from browser cookies
-function loadProgressFromCookie() {
-    // Retrieve the 'skillProgress' cookie
-    let cookies = document.cookie.split(';');
-    let skillProgressCookie = cookies.find(cookie => cookie.trim().startsWith('skillProgress='));
+// Load data from local storage
+function loadProgressFromLocalStorage() {
+    let progressDataString = localStorage.getItem('skillProgress');
 
-    if (skillProgressCookie) {
-        let progressDataString = skillProgressCookie.split('=')[1];
+    if (progressDataString) {
         let progressData = JSON.parse(progressDataString);
 
         for (let skillName in progressData) {
             let skill = document.querySelector(`h2:contains('${skillName}')`).closest('.skill-container');
-            if (skill) {
-                let levelSpan = skill.querySelector('.level-counter span');
-                let progressDiv = skill.querySelector('.xp-progress');
-                if (levelSpan && progressDiv) {
-                    levelSpan.textContent = progressData[skillName].level;
-                    progressDiv.style.width = progressData[skillName].xpWidth;
-                }
-            }
+            let levelSpan = skill.querySelector('.level-counter span');
+            let progressDiv = skill.querySelector('.xp-progress');
+
+            levelSpan.textContent = progressData[skillName].level;
+            progressDiv.style.width = progressData[skillName].xpWidth;
         }
     }
 }
@@ -136,8 +122,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     // Load progress when the document is loaded
-    loadProgressFromCookie();
+    loadProgressFromLocalStorage();
 });
 
 // Save progress before the page unloads
-window.addEventListener('beforeunload', saveProgressToCookie);
+window.addEventListener('beforeunload', saveProgressToLocalStorage);
