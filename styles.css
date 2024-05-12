@@ -1,0 +1,115 @@
+html {
+  font-family: monospace;
+}
+
+body {
+  background-color:rgb(189, 184, 184)
+}
+
+h1 {
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 40px;
+}
+
+p{
+  text-align: center;
+  font-style: italic;
+  font-size: 1.5rem;
+  margin-top: 40px;
+}
+.skill-container {
+  margin-left: 20px;
+  margin-bottom: 35px;
+}
+
+.skill {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.elements {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.add-button {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color:rgb(7, 161, 59);
+  border: none;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+
+.Remove {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color:rgb(184, 55, 55);
+  border: none;
+  border-radius: 50px;
+  margin-right: 10px;
+}
+
+span {
+  font-weight: bold;
+}
+
+.bar {
+  background-color: rgb(146, 168, 190);
+  height: 25px;
+  width: 70vw;
+  border: 1px solid rgb(255, 255, 255);
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.level-counter {
+  position:  a;
+  left: 10px;
+  font-size: 2rem;
+  margin-left: 10px;
+}
+
+.xp-progress {
+  height: 24px;
+  background-color: #4CAF50;
+  text-align: center;
+  line-height: 24px;
+  color: white;
+  width: 0%; /* Initial width */
+  transition: width 0.5s ease-in-out; /* Smooth transition for width changes */
+}
+
+.neon-effect {
+  box-shadow:
+      0 0 3px #19FF19, /* Innermost glow */
+      0 0 6px #19FF19, /* Inner glow */
+      0 0 9px #19FF19, /* Middle glow */
+      0 0 12px #19FF19; /* Outer glow */
+  animation: pulsate 1.5s ease-in-out infinite;
+}
+
+@keyframes pulsate {
+  0%, 100% {
+      box-shadow:
+          0 0 3px #19FF19,
+          0 0 6px #19FF19,
+          0 0 9px #19FF19,
+          0 0 12px #19FF19;
+  }
+  50% {
+      box-shadow:
+          0 0 4px #19FF19,
+          0 0 8px #19FF19,
+          0 0 12px #19FF19,
+          0 0 16px #19FF19;
+  }
+}
+
