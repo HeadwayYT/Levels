@@ -31,7 +31,7 @@ p{
 
 .elements {
   display: flex;
-  flex-wrap: wrap;
+  width: 90vw;
   align-items: center;
   margin-left: 10px;
 }
