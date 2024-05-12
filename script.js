@@ -85,30 +85,34 @@ function saveProgressToCookie() {
     // Convert progressData object to a JSON string
     let progressDataString = JSON.stringify(progressData);
 
-    // Set expiration date 1 year from now
+    // Set expiration date to a year from now
     let expirationDate = new Date();
     expirationDate.setFullYear(expirationDate.getFullYear() + 1);
 
     // Save progressDataString to a cookie named 'skillProgress' with expiration date
-    document.cookie = `skillProgress=${progressDataString}; expires=${expirationDate.toUTCString()}`;
+    document.cookie = `skillProgress=${progressDataString}; expires=${expirationDate.toUTCString()}; path=/`;
 }
 
 // Load data from browser cookies
 function loadProgressFromCookie() {
     // Retrieve the 'skillProgress' cookie
-    let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)skillProgress\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    let cookies = document.cookie.split(';');
+    let skillProgressCookie = cookies.find(cookie => cookie.trim().startsWith('skillProgress='));
 
-    if (cookieValue) {
-        // Parse the JSON string stored in the cookie
-        let progressData = JSON.parse(cookieValue);
+    if (skillProgressCookie) {
+        let progressDataString = skillProgressCookie.split('=')[1];
+        let progressData = JSON.parse(progressDataString);
 
         for (let skillName in progressData) {
             let skill = document.querySelector(`h2:contains('${skillName}')`).closest('.skill-container');
-            let levelSpan = skill.querySelector('.level-counter span');
-            let progressDiv = skill.querySelector('.xp-progress');
-
-            levelSpan.textContent = progressData[skillName].level;
-            progressDiv.style.width = progressData[skillName].xpWidth;
+            if (skill) {
+                let levelSpan = skill.querySelector('.level-counter span');
+                let progressDiv = skill.querySelector('.xp-progress');
+                if (levelSpan && progressDiv) {
+                    levelSpan.textContent = progressData[skillName].level;
+                    progressDiv.style.width = progressData[skillName].xpWidth;
+                }
+            }
         }
     }
 }
@@ -136,4 +140,4 @@ document.addEventListener('DOMContentLoaded', (event) => {
 });
 
 // Save progress before the page unloads
-window.onbeforeunload = saveProgressToCookie;
+window.addEventListener('beforeunload', saveProgressToCookie);
