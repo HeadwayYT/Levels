@@ -1,90 +1,73 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-    // Function to add experience points
-    function addXP(skill) {
-        let levelSpan = document.getElementById(skill + '-level');
-        let progressDiv = document.getElementById(skill + '-progress').firstElementChild;
-        let currentLevel = parseInt(levelSpan.textContent);
-        let xpToAdd = 20; // Each tap adds 20% to the XP bar
-        let maxXP = 100; // XP required to level up
+// Function to add experience points
+function addXP(skill) {
+    let levelSpan = document.getElementById(skill + '-level');
+    let progressDiv = document.getElementById(skill + '-progress').firstElementChild;
+    let currentLevel = parseInt(levelSpan.textContent);
+    let xpToAdd = 20; // Each tap adds 20% to the XP bar
+    let maxXP = 100; // XP required to level up
 
-        // Calculate the new width of the XP progress bar
-        let currentWidth = parseInt(progressDiv.style.width.slice(0, -1)) || 0;
-        let newWidth = currentWidth + xpToAdd;
+    // Calculate the new width of the XP progress bar
+    let currentWidth = parseInt(progressDiv.style.width.slice(0, -1)) || 0;
+    let newWidth = currentWidth + xpToAdd;
 
-        // Check if the bar is full
-        if (newWidth >= maxXP) {
-            // Increase the level
-            currentLevel++;
-            levelSpan.textContent = currentLevel.toString();
-            // Add neon effect
-            progressDiv.parentNode.classList.add('neon-effect');
-            // Reset the progress bar with animation
-            progressDiv.classList.add('progress-bar');
-            progressDiv.style.width = '100%';
+    // Check if the bar is full
+    if (newWidth >= maxXP) {
+        // Increase the level
+        currentLevel++;
+        levelSpan.textContent = currentLevel.toString();
+        // Add neon effect
+        progressDiv.parentNode.classList.add('neon-effect');
+        // Reset the progress bar with animation
+        progressDiv.classList.add('progress-bar');
+        progressDiv.style.width = '100%';
+        setTimeout(() => {
+            // Remove the transition class after the animation is completed
+            progressDiv.classList.remove('progress-bar');
+            // Reset the width
+            progressDiv.style.width = '0%';
+            // Remove neon effect after some time
             setTimeout(() => {
-                // Remove the transition class after the animation is completed
-                progressDiv.classList.remove('progress-bar');
-                // Reset the width
-                progressDiv.style.width = '0%';
-                // Remove neon effect after some time
-                setTimeout(() => {
-                    progressDiv.parentNode.classList.remove('neon-effect');
-                }, 2000); // Neon effect lasts for 2 seconds
-            }, 500); // Duration of the animation (same as CSS transition duration)
-        } else {
-            // Update the progress bar width with animation
-            progressDiv.classList.add('progress-bar');
-            progressDiv.style.width = newWidth + '%';
-            setTimeout(() => {
-                progressDiv.classList.remove('progress-bar');
-            }, 500); // Duration of the animation (same as CSS transition duration)
-        }
-    }
-
-    // Function to remove experience points
-    function remXP(skill) {
-        let levelSpan = document.getElementById(skill + '-level');
-        let progressDiv = document.getElementById(skill + '-progress').firstElementChild;
-        let currentLevel = parseInt(levelSpan.textContent);
-        let xpToRemove = 20; // Each undo removes 20% from the XP bar
-
-        // Calculate the new width of the XP progress bar
-        let currentWidth = parseInt(progressDiv.style.width.slice(0, -1)) || 0;
-        let newWidth = currentWidth - xpToRemove;
-
-        // Check if the bar is empty and level is greater than 1
-        if (newWidth < 0 && currentLevel > 1) {
-            // Decrease the level
-            currentLevel--;
-            levelSpan.textContent = currentLevel.toString();
-            // Set the progress bar to full (just below level up)
-            newWidth = 80;
-        } else if (newWidth < 0) {
-            // Prevent the bar from going negative
-            newWidth = 0;
-        }
-
-        // Update the progress bar width
+                progressDiv.parentNode.classList.remove('neon-effect');
+            }, 2000); // Neon effect lasts for 2 seconds
+        }, 500); // Duration of the animation (same as CSS transition duration)
+    } else {
+        // Update the progress bar width with animation
+        progressDiv.classList.add('progress-bar');
         progressDiv.style.width = newWidth + '%';
+        setTimeout(() => {
+            progressDiv.classList.remove('progress-bar');
+        }, 500); // Duration of the animation (same as CSS transition duration)
+    }
+    saveProgress(); // Save progress after adding XP
+}
+
+// Function to remove experience points
+function remXP(skill) {
+    let levelSpan = document.getElementById(skill + '-level');
+    let progressDiv = document.getElementById(skill + '-progress').firstElementChild;
+    let currentLevel = parseInt(levelSpan.textContent);
+    let xpToRemove = 20; // Each undo removes 20% from the XP bar
+
+    // Calculate the new width of the XP progress bar
+    let currentWidth = parseInt(progressDiv.style.width.slice(0, -1)) || 0;
+    let newWidth = currentWidth - xpToRemove;
+
+    // Check if the bar is empty and level is greater than 1
+    if (newWidth < 0 && currentLevel > 1) {
+        // Decrease the level
+        currentLevel--;
+        levelSpan.textContent = currentLevel.toString();
+        // Set the progress bar to full (just below level up)
+        newWidth = 80;
+    } else if (newWidth < 0) {
+        // Prevent the bar from going negative
+        newWidth = 0;
     }
 
-    // Attach the addXP and remXP functions to buttons
-    let addButtons = document.querySelectorAll('.add-button');
-    addButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            let skill = this.getAttribute('onclick').match(/\('(.+)'\)/)[1];
-            addXP(skill);
-        });
-    });
-
-    let removeButtons = document.querySelectorAll('.Remove');
-    removeButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            let skill = this.getAttribute('onclick').match(/\('(.+)'\)/)[1];
-            remXP(skill);
-        });
-    });
-});
+    // Update the progress bar width
+    progressDiv.style.width = newWidth + '%';
+    saveProgress(); // Save progress after removing XP
+}
 
 // Save data to local storage
 function saveProgress() {
@@ -118,5 +101,27 @@ function loadProgress() {
     }
 }
 
-// Call loadProgress when the document is loaded
-document.addEventListener('DOMContentLoaded', loadProgress);
+// Event listeners for add and remove buttons
+document.addEventListener('DOMContentLoaded', (event) => {
+    let addButtons = document.querySelectorAll('.add-button');
+    addButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            let skill = this.getAttribute('data-skill');
+            addXP(skill);
+        });
+    });
+
+    let removeButtons = document.querySelectorAll('.remove-button');
+    removeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            let skill = this.getAttribute('data-skill');
+            remXP(skill);
+        });
+    });
+
+    // Load progress when the document is loaded
+    loadProgress();
+});
+
+// Save progress before the page unloads
+window.onbeforeunload = saveProgress;
