@@ -2,11 +2,7 @@ html {
   font-family: monospace;
 }
 
-body {
-  background-color:rgb(189, 184, 184);
-  height: 100svh;
-  width: 75svw;
-}
+
 
 h1 {
   text-align: center;
@@ -20,6 +16,7 @@ p{
   font-size: 1.5rem;
   margin-top: 40px;
 }
+
 .skill-container {
   margin-left: 20px;
   margin-bottom: 35px;
@@ -117,4 +114,10 @@ h2 {
 
 .progress-bar {
   transition: width 0.5s ease; /* Change 0.5s to adjust the duration of the animation */
+}
+
+body {
+  background-color:rgb(189, 184, 184);
+  height: 100svh;
+  width: 75svw;
 }
