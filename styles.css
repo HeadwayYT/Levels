@@ -4,14 +4,12 @@ html {
 
 body {
   background-color:rgb(189, 184, 184);
-  margin-left: 5vw;
 }
 
 h1 {
   text-align: center;
   font-size: 3rem;
   margin-top: 40px;
-  margin-right: 40px;
 }
 
 p{
@@ -19,7 +17,6 @@ p{
   font-style: italic;
   font-size: 1.5rem;
   margin-top: 40px;
-  margin-right: 40px;
 }
 .skill-container {
   margin-left: 20px;
