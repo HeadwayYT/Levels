@@ -38,7 +38,7 @@ function addXP(skill) {
             progressDiv.classList.remove('progress-bar');
         }, 500); // Duration of the animation (same as CSS transition duration)
     }
-    saveProgress(); // Save progress after adding XP
+    saveProgressToCookie(); // Save progress after adding XP
 }
 
 // Function to remove experience points
@@ -66,11 +66,11 @@ function remXP(skill) {
 
     // Update the progress bar width
     progressDiv.style.width = newWidth + '%';
-    saveProgress(); // Save progress after removing XP
+    saveProgressToCookie(); // Save progress after removing XP
 }
 
-// Save data to local storage
-function saveProgress() {
+// Save data to browser cookies
+function saveProgressToCookie() {
     let skills = document.querySelectorAll('.skill-container');
     let progressData = {};
 
@@ -82,14 +82,22 @@ function saveProgress() {
         progressData[skillName] = { level, xpWidth };
     });
 
-    localStorage.setItem('skillProgress', JSON.stringify(progressData));
+    // Convert progressData object to a JSON string
+    let progressDataString = JSON.stringify(progressData);
+
+    // Save progressDataString to a cookie named 'skillProgress'
+    document.cookie = `skillProgress=${progressDataString}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
 }
 
-// Load data from local storage
-function loadProgress() {
-    let progressData = JSON.parse(localStorage.getItem('skillProgress'));
+// Load data from browser cookies
+function loadProgressFromCookie() {
+    // Retrieve the 'skillProgress' cookie
+    let cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)skillProgress\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-    if (progressData) {
+    if (cookieValue) {
+        // Parse the JSON string stored in the cookie
+        let progressData = JSON.parse(cookieValue);
+
         for (let skillName in progressData) {
             let skill = document.querySelector(`h2:contains('${skillName}')`).closest('.skill-container');
             let levelSpan = skill.querySelector('.level-counter span');
@@ -120,8 +128,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
 
     // Load progress when the document is loaded
-    loadProgress();
+    loadProgressFromCookie();
 });
 
 // Save progress before the page unloads
-window.onbeforeunload = saveProgress;
+window.onbeforeunload = saveProgressToCookie;
