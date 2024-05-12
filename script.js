@@ -83,11 +83,13 @@ function saveProgressToLocalStorage() {
     });
 
     localStorage.setItem('skillProgress', JSON.stringify(progressData));
+    console.log('Progress saved:', progressData);
 }
 
 // Load data from local storage
 function loadProgressFromLocalStorage() {
     let progressDataString = localStorage.getItem('skillProgress');
+    console.log('Progress data retrieved:', progressDataString);
 
     if (progressDataString) {
         let progressData = JSON.parse(progressDataString);
