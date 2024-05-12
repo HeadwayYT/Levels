@@ -4,6 +4,8 @@ html {
 
 body {
   background-color:rgb(189, 184, 184);
+  height: 100svh;
+  width: 75svw;
 }
 
 h1 {
@@ -61,7 +63,7 @@ span {
 .bar {
   background-color: rgb(146, 168, 190);
   height: 25px;
-  width: 75vw;
+  width: 60svw;
   border: 1px solid rgb(255, 255, 255);
 }
 
