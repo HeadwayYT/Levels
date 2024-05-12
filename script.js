@@ -83,24 +83,27 @@ function saveProgressToLocalStorage() {
     });
 
     localStorage.setItem('skillProgress', JSON.stringify(progressData));
-    console.log('Progress saved:', progressData);
 }
 
 // Load data from local storage
 function loadProgressFromLocalStorage() {
     let progressDataString = localStorage.getItem('skillProgress');
-    console.log('Progress data retrieved:', progressDataString);
 
     if (progressDataString) {
         let progressData = JSON.parse(progressDataString);
 
         for (let skillName in progressData) {
-            let skill = document.querySelector(`h2:contains('${skillName}')`).closest('.skill-container');
-            let levelSpan = skill.querySelector('.level-counter span');
-            let progressDiv = skill.querySelector('.xp-progress');
+            let skills = document.querySelectorAll('.skill-container');
+            skills.forEach(skill => {
+                let h2 = skill.querySelector('h2');
+                if (h2 && h2.textContent.includes(skillName)) {
+                    let levelSpan = skill.querySelector('.level-counter span');
+                    let progressDiv = skill.querySelector('.xp-progress');
 
-            levelSpan.textContent = progressData[skillName].level;
-            progressDiv.style.width = progressData[skillName].xpWidth;
+                    levelSpan.textContent = progressData[skillName].level;
+                    progressDiv.style.width = progressData[skillName].xpWidth;
+                }
+            });
         }
     }
 }
