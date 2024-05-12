@@ -61,7 +61,7 @@ span {
 .bar {
   background-color: rgb(146, 168, 190);
   height: 25px;
-  width: 70vw;
+  width: 75vw;
   border: 1px solid rgb(255, 255, 255);
 }
 
@@ -113,3 +113,6 @@ h2 {
   }
 }
 
+.progress-bar {
+  transition: width 0.5s ease; /* Change 0.5s to adjust the duration of the animation */
+}
