@@ -103,7 +103,7 @@ function loadProgressFromLocalStorage() {
             let skills = document.querySelectorAll('.skill-container');
             skills.forEach(skill => {
                 let h2 = skill.querySelector('h2');
-                if (h2 && h2.textContent.includes(skillName)) {
+                if (h2 && h2.textContent in progressData) { // Check if the saved skill name exists in the DOM
                     let levelSpan = skill.querySelector('.level-counter span');
                     let progressDiv = skill.querySelector('.xp-progress');
 
