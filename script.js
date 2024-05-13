@@ -3,7 +3,7 @@ function addXP(skill) {
     let levelSpan = document.getElementById(skill + '-level');
     let progressDiv = document.getElementById(skill + '-progress').firstElementChild;
     let currentLevel = parseInt(levelSpan.textContent);
-    let xpToAdd = 20; // Each tap adds 20% to the XP bar
+    let xpToAdd = 10; // Each tap adds 20% to the XP bar
     let maxXP = 100; // XP required to level up
 
     // Calculate the new width of the XP progress bar
@@ -143,15 +143,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let addButtons = document.querySelectorAll('.add-button');
     addButtons.forEach(button => {
         button.addEventListener('click', function() {
-            let skill = this.getAttribute('data-skill');
+            let skill = this.parentElement.parentElement.id; // changed here
             addXP(skill);
         });
     });
 
-    let removeButtons = document.querySelectorAll('.remove-button');
+    let removeButtons = document.querySelectorAll('.remove-button'); // changed here
     removeButtons.forEach(button => {
         button.addEventListener('click', function() {
-            let skill = this.getAttribute('data-skill');
+            let skill = this.parentElement.parentElement.id; // changed here
             remXP(skill);
         });
     });
