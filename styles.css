@@ -18,6 +18,12 @@ h2 {
   width: 125px;
 }
 
+a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 p{
   display: flex;
   justify-content: center;

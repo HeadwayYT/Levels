@@ -80,9 +80,11 @@ function remXP(skill) {
 function saveProgressToLocalStorage() {
     let skills = document.querySelectorAll('.skill-container');
     let progressData = {};
+    let skillNames = [];
 
     skills.forEach(skill => {
         let skillName = skill.querySelector('h2').textContent;
+        skillNames.push(skillName); // Store skill name
         let level = skill.querySelector('.level-counter span').textContent;
         let xpWidth = skill.querySelector('.xp-progress').style.width;
 
@@ -90,7 +92,7 @@ function saveProgressToLocalStorage() {
     });
 
     // Save both skill names and progress data
-    localStorage.setItem('skillData', JSON.stringify({ progressData, skillNames: getSkillNames() }));
+    localStorage.setItem('skillData', JSON.stringify({ progressData, skillNames }));
 }
 
 // Load data from local storage
@@ -160,3 +162,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
 // Save progress before the page unloads
 window.addEventListener('beforeunload', saveProgressToLocalStorage);
+
+// Event listener to detect changes in skill names
+document.querySelectorAll('.skill-container h2').forEach(skillName => {
+    skillName.addEventListener('input', function() {
+        saveProgressToLocalStorage(); // Save progress when a skill name is changed
+    });
+});
