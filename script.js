@@ -30,7 +30,7 @@ function addXP(skill) {
             // Remove neon effect after some time
             setTimeout(() => {
                 progressDiv.parentNode.classList.remove('neon-effect');
-            }, 2000); // Neon effect lasts for 2 seconds
+            }, 300); // Neon effect lasts for 2 seconds
         }, 500); // Duration of the animation (same as CSS transition duration)
     } else {
         // Play sound effect when adding XP only if level up animation is not playing
@@ -123,7 +123,7 @@ function playLevelUpSound() {
 
 // Function to play sound effect when adding XP
 function playAddXPSound() {
-    let sound = new Audio('add_xp_sound.mp3'); // Replace 'add_xp_sound.mp3' with the path to your sound effect
+    let sound = new Audio('win2.mp3'); // Replace 'add_xp_sound.mp3' with the path to your sound effect
     sound.play();
 }
 
