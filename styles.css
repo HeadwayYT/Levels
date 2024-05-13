@@ -76,8 +76,7 @@ span {
 .bar {
   background-color: rgb(146, 168, 190);
   height: 25px;
-  width: 600px;
-  min-width: 300px;
+  width: 30svw;
   border: 1px solid rgb(255, 255, 255);
 }
 
