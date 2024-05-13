@@ -26,12 +26,18 @@ p{
   color: rgb(73, 73, 73);
 }
 
+.skill {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline; 
+}
+
 .skill-container {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  gap: 20px;
   min-width: fit-content;
   margin: auto;
   margin-bottom: 5svh;
