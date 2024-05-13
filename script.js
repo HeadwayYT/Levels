@@ -6,6 +6,9 @@ function addXP(skill) {
     let xpToAdd = 20; // Each tap adds 20% to the XP bar
     let maxXP = 100; // XP required to level up
 
+    // Play sound effect when adding XP
+    playAddXPSound();
+
     // Calculate the new width of the XP progress bar
     let currentWidth = parseInt(progressDiv.style.width.slice(0, -1)) || 0;
     let newWidth = currentWidth + xpToAdd;
@@ -113,6 +116,12 @@ function loadProgressFromLocalStorage() {
 // Function to play level up sound
 function playLevelUpSound() {
     let sound = new Audio('win.mp3');
+    sound.play();
+}
+
+// Function to play sound effect when adding XP
+function playAddXPSound() {
+    let sound = new Audio('win2.mp3'); // Replace 'add_xp_sound.mp3' with the path to your sound effect
     sound.play();
 }
 
