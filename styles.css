@@ -28,6 +28,7 @@ p{
 .skill-container {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
   min-width: fit-content;
