@@ -6,9 +6,6 @@ function addXP(skill) {
     let xpToAdd = 20; // Each tap adds 20% to the XP bar
     let maxXP = 100; // XP required to level up
 
-    // Play sound effect when adding XP
-    playAddXPSound();
-
     // Calculate the new width of the XP progress bar
     let currentWidth = parseInt(progressDiv.style.width.slice(0, -1)) || 0;
     let newWidth = currentWidth + xpToAdd;
@@ -36,6 +33,11 @@ function addXP(skill) {
             }, 2000); // Neon effect lasts for 2 seconds
         }, 500); // Duration of the animation (same as CSS transition duration)
     } else {
+        // Play sound effect when adding XP only if level up animation is not playing
+        if (!progressDiv.parentNode.classList.contains('neon-effect')) {
+            playAddXPSound();
+        }
+        
         // Update the progress bar width with animation
         progressDiv.classList.add('progress-bar');
         progressDiv.style.width = newWidth + '%';
@@ -121,7 +123,7 @@ function playLevelUpSound() {
 
 // Function to play sound effect when adding XP
 function playAddXPSound() {
-    let sound = new Audio('win2.mp3'); // Replace 'add_xp_sound.mp3' with the path to your sound effect
+    let sound = new Audio('add_xp_sound.mp3'); // Replace 'add_xp_sound.mp3' with the path to your sound effect
     sound.play();
 }
 
