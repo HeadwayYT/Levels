@@ -89,30 +89,39 @@ function saveProgressToLocalStorage() {
         progressData[skillName] = { level, xpWidth };
     });
 
-    localStorage.setItem('skillProgress', JSON.stringify(progressData));
+    // Save both skill names and progress data
+    localStorage.setItem('skillData', JSON.stringify({ progressData, skillNames: getSkillNames() }));
 }
 
 // Load data from local storage
 function loadProgressFromLocalStorage() {
-    let progressDataString = localStorage.getItem('skillProgress');
+    let skillDataString = localStorage.getItem('skillData');
 
-    if (progressDataString) {
-        let progressData = JSON.parse(progressDataString);
+    if (skillDataString) {
+        let { progressData, skillNames } = JSON.parse(skillDataString);
+        let skills = document.querySelectorAll('.skill-container');
 
-        for (let skillName in progressData) {
-            let skills = document.querySelectorAll('.skill-container');
-            skills.forEach(skill => {
-                let h2 = skill.querySelector('h2');
-                if (h2 && h2.textContent in progressData) { // Check if the saved skill name exists in the DOM
-                    let levelSpan = skill.querySelector('.level-counter span');
-                    let progressDiv = skill.querySelector('.xp-progress');
+        skills.forEach(skill => {
+            let h2 = skill.querySelector('h2');
+            if (h2 && skillNames.includes(h2.textContent)) {
+                let levelSpan = skill.querySelector('.level-counter span');
+                let progressDiv = skill.querySelector('.xp-progress');
 
-                    levelSpan.textContent = progressData[skillName].level;
-                    progressDiv.style.width = progressData[skillName].xpWidth;
-                }
-            });
-        }
+                levelSpan.textContent = progressData[h2.textContent].level;
+                progressDiv.style.width = progressData[h2.textContent].xpWidth;
+            }
+        });
     }
+}
+
+// Function to get current skill names
+function getSkillNames() {
+    let skillNames = [];
+    let skills = document.querySelectorAll('.skill-container h2');
+    skills.forEach(skill => {
+        skillNames.push(skill.textContent);
+    });
+    return skillNames;
 }
 
 // Function to play level up sound
