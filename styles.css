@@ -12,6 +12,7 @@ body {
 h1 {
   text-align: center;
   font-size: 3rem;
+  margin: auto;
 }
 
 h2 {
@@ -24,6 +25,7 @@ p{
   text-align: center;
   font-style: italic;
   font-size: 1 rem;
+  margin: 20px auto;
 }
 
 .skill-container {
@@ -31,7 +33,7 @@ p{
   align-items: center;
   justify-content: center;
   gap: 20px;
-  width: 80svw;
+  min-width: fit-content;
   margin: auto;
   margin-bottom: 5svh;
 }
