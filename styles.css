@@ -1,10 +1,12 @@
 html {
   font-family: monospace;
+  min-height: fit-content;
+  min-width: fit-content;
 }
 
 body {
   background-color:rgb(189, 184, 184);
-  min-height: fit-content;
+  align-items: center; 
 }
 
 h1 {
@@ -27,7 +29,7 @@ p{
 .skill-container {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
   width: 80svw;
   margin-left: 10svw;
@@ -76,7 +78,8 @@ span {
 .bar {
   background-color: rgb(146, 168, 190);
   height: 25px;
-  width: 60svw;
+  width: 600px;
+  min-width: 300px;
   border: 1px solid rgb(255, 255, 255);
 }
 
