@@ -4,54 +4,58 @@ html {
 
 body {
   background-color:rgb(189, 184, 184);
+  min-height: fit-content;
 }
 
 h1 {
   text-align: center;
   font-size: 3rem;
-  margin-top: 40px;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 2rem;
+  width: 125px;
 }
 
 p{
   text-align: center;
   font-style: italic;
-  font-size: 1.5rem;
-  margin-top: 40px;
-}
-.skill-container {
-  margin-left: 20px;
-  margin-bottom: 35px;
+  font-size: 1 rem;
 }
 
-.skill {
+.skill-container {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 80svw;
+  margin-left: 10svw;
+  margin-bottom: 5svh;
 }
 
 .elements {
   display: flex;
-  width: 90vw;
   align-items: center;
-  margin-left: 10px;
+  gap: 5px;
+  width: 60svw;
 }
 
 .add-button {
   font-size: 1.5rem;
   font-weight: bold;
   background-color:rgb(7, 161, 59);
-  border: none;
   border-radius: 50px;
-  margin-right: 10px;
+  border-color: rgb(221, 212, 212);
 }
 
 .Remove {
   font-size: 1.5rem;
   font-weight: bold;
+  height: 30px;
   background-color:rgb(184, 55, 55);
-  border: none;
+  border-color: rgb(201, 201, 201);
   border-radius: 50px;
-  margin-right: 10px;
 }
 
 span {
@@ -61,20 +65,12 @@ span {
 .bar {
   background-color: rgb(146, 168, 190);
   height: 25px;
-  width: 75vw;
+  width: 50svw;
   border: 1px solid rgb(255, 255, 255);
 }
 
-h2 {
-  font-weight: bold;
-  font-size: 2rem;
-}
-
 .level-counter {
-  position:  a;
-  left: 10px;
   font-size: 2rem;
-  margin-left: 10px;
 }
 
 .xp-progress {

@@ -15,6 +15,8 @@ function addXP(skill) {
         // Increase the level
         currentLevel++;
         levelSpan.textContent = currentLevel.toString();
+        // Play level up sound
+        playLevelUpSound();
         // Add neon effect
         progressDiv.parentNode.classList.add('neon-effect');
         // Reset the progress bar with animation
@@ -106,6 +108,12 @@ function loadProgressFromLocalStorage() {
             });
         }
     }
+}
+
+// Function to play level up sound
+function playLevelUpSound() {
+    let sound = new Audio('win.mp3');
+    sound.play();
 }
 
 // Event listeners for add and remove buttons
