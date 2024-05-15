@@ -2,11 +2,13 @@
 const explanation = document.getElementById('explanation');
 const toggleButton = document.getElementById('toggleExplanation');
 
-toggleButton.addEventListener('click', () => {
+toggleButton.addEventListener('click', function() {
     explanation.classList.toggle('hidden');
-    toggleButton.textContent = explanation.classList.contains('hidden') ? 'Show Explanation' : 'Hide Explanation';
-    // Save explanation visibility state to local storage
-    localStorage.setItem('explanationHidden', explanation.classList.contains('hidden'));
+    if (explanation.classList.contains('hidden')) {
+        toggleButton.textContent = 'Show Explanation';
+    } else {
+        toggleButton.textContent = 'Hide Explanation';
+    }
 });
 
 // Function to add experience points
@@ -33,13 +35,13 @@ function addXP(skill) {
         // Reset the progress bar with animation
         progressDiv.classList.add('progress-bar');
         progressDiv.style.width = '100%';
-        setTimeout(() => {
+        setTimeout(function() {
             // Remove the transition class after the animation is completed
             progressDiv.classList.remove('progress-bar');
             // Reset the width
             progressDiv.style.width = '0%';
             // Remove neon effect after some time
-            setTimeout(() => {
+            setTimeout(function() {
                 progressDiv.parentNode.classList.remove('neon-effect');
             }, 300); // Neon effect lasts for 2 seconds
         }, 500); // Duration of the animation (same as CSS transition duration)
@@ -52,7 +54,7 @@ function addXP(skill) {
         // Update the progress bar width with animation
         progressDiv.classList.add('progress-bar');
         progressDiv.style.width = newWidth + '%';
-        setTimeout(() => {
+        setTimeout(function() {
             progressDiv.classList.remove('progress-bar');
         }, 500); // Duration of the animation (same as CSS transition duration)
     }
@@ -92,7 +94,7 @@ function saveProgressToLocalStorage() {
     let skills = document.querySelectorAll('.skill-container');
     let progressData = {};
 
-    skills.forEach(skill => {
+    skills.forEach(function(skill) {
         let skillInput = skill.querySelector('input[type="text"]');
         let skillName = skillInput.value;
         let level = skill.querySelector('.level-counter span').textContent;
@@ -113,7 +115,7 @@ function loadProgressFromLocalStorage() {
         let progressData = JSON.parse(skillDataString);
         let skills = document.querySelectorAll('.skill-container');
 
-        skills.forEach(skill => {
+        skills.forEach(function(skill) {
             let skillInput = skill.querySelector('input[type="text"]');
             let skillId = skillInput.id;
             if (progressData.hasOwnProperty(skillId)) {
@@ -140,9 +142,9 @@ function playAddXPSound() {
 }
 
 // Event listeners for add and remove buttons
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function() {
     let addButtons = document.querySelectorAll('.add-button');
-    addButtons.forEach(button => {
+    addButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
             addXP(skill);
@@ -150,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     let removeButtons = document.querySelectorAll('.remove-button');
-    removeButtons.forEach(button => {
+    removeButtons.forEach(function(button) {
         button.addEventListener('click', function() {
             let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
             remXP(skill);
@@ -165,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('beforeunload', saveProgressToLocalStorage);
 
 // Event listener to detect changes in skill names
-document.querySelectorAll('.skill-container input[type="text"]').forEach(skillInput => {
+document.querySelectorAll('.skill-container input[type="text"]').forEach(function(skillInput) {
     skillInput.addEventListener('input', function() {
         saveProgressToLocalStorage(); // Save progress when a skill name is changed
     });

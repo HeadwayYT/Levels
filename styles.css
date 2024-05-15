@@ -108,7 +108,7 @@ span {
   font-size: 1rem;
   font-weight: bold;
   padding: 10px 20px;
-  background: linear-gradient(to right, #15e94e, #009d2d); /* Green gradient */
+  background: linear-gradient(to right, #ffd700, #d8a830); /* Golden gradient */
   border-radius: 25px;
   border: none; /* Remove border */
   color: #fff;
@@ -117,7 +117,6 @@ span {
   transition: all 0.3s ease;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Add box shadow for depth */
 }
-
 .add-button:hover {
   transform: translateY(-2px); /* Add upward movement on hover */
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Increase shadow size on hover for more depth */
