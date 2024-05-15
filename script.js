@@ -1,3 +1,12 @@
+// JavaScript for toggling explanation paragraph
+const explanation = document.getElementById('explanation');
+const toggleButton = document.getElementById('toggleExplanation');
+
+toggleButton.addEventListener('click', () => {
+    explanation.classList.toggle('hidden');
+    toggleButton.textContent = explanation.classList.contains('hidden') ? 'Show Explanation' : 'Hide Explanation';
+});
+
 // Function to add experience points
 function addXP(skill) {
     let levelSpan = document.getElementById(skill + '-level');

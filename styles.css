@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  background-color:rgb(241, 241, 241);
+  background-color:rgb(255, 255, 255);
 }
 
 h1 {
@@ -12,19 +12,45 @@ h1 {
   margin: 20px auto;
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+#toggleExplanation {
+  font-size: 0.8rem; /* Adjust font size */
+  padding: 5px 10px; /* Adjust padding */
+  background-color: rgb(240, 240, 240);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#toggleExplanation:hover {
+  background-color: #242425;
+}
+
+.hidden {
+  display: none;
+}
+
 input {
   font-weight: bold;
   font-size: 1.75rem;
   width: 130px;
   border: none; /* Remove default border */
   background: none; /* Remove default background */
+  margin-left: 5px;
 }
 
 a {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 60px;
+  margin-top: 30px;
 }
 
 p{
@@ -34,6 +60,10 @@ p{
   font-size: 0.75 rem;
   color: rgb(73, 73, 73);
   margin-bottom: 20px;
+}
+
+input::placeholder {
+  color: #484849; /* Change placeholder text color for input fields */
 }
 
 .skill {
@@ -50,7 +80,11 @@ p{
   justify-content: center;
   min-width: fit-content;
   margin: auto;
-  margin-bottom: 5svh;
+  border: solid grey 1px;
+  padding: 10px;
+  background: rgb(240, 240, 240);
+  width: fit-content;
+  margin-bottom: 2svh;
 }
 
 .level-counter {
@@ -60,8 +94,6 @@ p{
 
 span {
   color: rgb(0, 0, 0);
-  background-color: rgb(255, 255, 255);
-  border-radius: 25%;
   font-size: 2rem;
   font-weight: bold;
 }
@@ -73,22 +105,41 @@ span {
 }
 
 .add-button {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
-  background: radial-gradient(circle, rgb(15, 233, 87), rgb(6, 158, 57));
-  border-radius: 50px;
-  border-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  background: linear-gradient(to right, #15e94e, #009d2d); /* Green gradient */
+  border-radius: 25px;
+  border: none; /* Remove border */
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Add box shadow for depth */
+}
+
+.add-button:hover {
+  transform: translateY(-2px); /* Add upward movement on hover */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Increase shadow size on hover for more depth */
 }
 
 .remove-button {
-  font-size: 1rem;
+  font-size: 0.8rem; /* Smaller font size */
   font-weight: bold;
-  height: 30px;
-  background-color:rgb(184, 55, 55);
-  border-color: rgb(201, 201, 201);
-  border-radius: 50px;
-  margin-right: 20px;
+  padding: 6px 12px; /* Adjust padding */
+  background: linear-gradient(to right, #555050, #b82a2a); /* Red gradient */
+  border-radius: 20px; /* Smaller border radius */
+  border: none; /* Remove border */
+  color: #fff;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2); /* Add box shadow for depth */
+}
+
+.remove-button:hover {
+  transform: translateY(-1px); /* Add upward movement on hover */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Increase shadow size on hover for more depth */
 }
 
 .bar {
