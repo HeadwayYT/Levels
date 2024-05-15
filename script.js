@@ -5,6 +5,8 @@ const toggleButton = document.getElementById('toggleExplanation');
 toggleButton.addEventListener('click', () => {
     explanation.classList.toggle('hidden');
     toggleButton.textContent = explanation.classList.contains('hidden') ? 'Show Explanation' : 'Hide Explanation';
+    // Save explanation visibility state to local storage
+    localStorage.setItem('explanationHidden', explanation.classList.contains('hidden'));
 });
 
 // Function to add experience points
