@@ -16,13 +16,15 @@ input {
   font-weight: bold;
   font-size: 1.75rem;
   width: 130px;
+  border: none; /* Remove default border */
+  background: none; /* Remove default background */
 }
 
 a {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 80px;
+  margin-top: 60px;
 }
 
 p{
@@ -31,6 +33,7 @@ p{
   font-style: italic;
   font-size: 0.75 rem;
   color: rgb(73, 73, 73);
+  margin-bottom: 20px;
 }
 
 .skill {
@@ -75,6 +78,7 @@ span {
   background: radial-gradient(circle, rgb(15, 233, 87), rgb(6, 158, 57));
   border-radius: 50px;
   border-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
 }
 
 .remove-button {
@@ -88,10 +92,12 @@ span {
 }
 
 .bar {
-  background-color: rgb(146, 168, 190);
+  background-color: rgba(146, 168, 190, 0.7);
   height: 25px;
-  width: 45svw;
-  border: 1px solid rgb(255, 255, 255);
+  width: 45svw; 
+  border: solid 1px white;
+  border-radius: 5px; 
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); 
 }
 
 .level-counter {
@@ -100,12 +106,14 @@ span {
 
 .xp-progress {
   height: 24px;
-  background-color: #4CAF50;
+  background: linear-gradient(to right, #1e5f00, #00be06); /* Add gradient background */
   text-align: center;
   line-height: 24px;
   color: white;
   width: 0%; /* Initial width */
   transition: width 0.5s ease-in-out; /* Smooth transition for width changes */
+  border-radius: 5px; /* Add border radius for rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Add box-shadow for shine effect */
 }
 
 .neon-effect {
