@@ -2,12 +2,25 @@
 const explanation = document.getElementById('explanation');
 const toggleButton = document.getElementById('toggleExplanation');
 
+// Check if the explanation state is stored in localStorage
+const isExplanationHidden = localStorage.getItem('isExplanationHidden');
+
+// If the explanation state is hidden in localStorage, hide it on page load
+if (isExplanationHidden === 'true') {
+    explanation.classList.add('hidden');
+    toggleButton.textContent = 'Show Explanation';
+}
+
 toggleButton.addEventListener('click', function() {
     explanation.classList.toggle('hidden');
     if (explanation.classList.contains('hidden')) {
         toggleButton.textContent = 'Show Explanation';
+        // Store the hidden state in localStorage
+        localStorage.setItem('isExplanationHidden', 'true');
     } else {
         toggleButton.textContent = 'Hide Explanation';
+        // Remove the hidden state from localStorage
+        localStorage.removeItem('isExplanationHidden');
     }
 });
 
