@@ -22,6 +22,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 80px;
 }
 
 p{
@@ -55,7 +56,8 @@ p{
 }
 
 span {
-  background-color:rgb(240, 240, 240); 
+  color: rgb(0, 0, 0);
+  background-color: rgb(255, 255, 255);
   border-radius: 25%;
   font-size: 2rem;
   font-weight: bold;
@@ -72,7 +74,7 @@ span {
   font-weight: bold;
   background-color:rgb(7, 161, 59);
   border-radius: 50px;
-  border-color: rgb(221, 212, 212);
+  border-color: rgb(255, 255, 255);
 }
 
 .Remove {

@@ -5,15 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Skill Bars</title>
         <link rel="stylesheet" href="styles.css">
-        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="vandijckeph" data-description="Support me on Buy me a coffee!" data-message="" data-color="#5F7FFF" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
     </head>
     <body>
         <h1>- Levels -</h1>
-        <p>1. Adjust the skillnames to your liking <br>2. Define tasks (+duration) per skill</br>3. Every time you perform a task you add XP to that skill</br></p>
-        <div class="skill-container" id="strength">
+        <p>This is a tool to keep track of your real-life skills <br> 1. Adjust the skillnames to your liking <br>2. Define tasks per skill that deserve XP</br>3. Every time you perform a task you add XP to that skill</br></p>
+        <div class="skill-container">
             <div class="skill">
-                <h2 contenteditable="true">Strength</h2>
-                <div class="level-counter">Level: <span id="strength-level">1</span></div>
+                <h2 contenteditable="true" id="strength">Strength</h2>
+                <div class="level-counter">Level&nbsp;&nbsp;<span id="strength-level">1</span></div>
             </div>
             <div class="elements">
                 <button class="add-button" onclick="addXP('strength')">Add <br>XP</br></button>
@@ -23,10 +22,10 @@
                 </div>
             </div>
         </div>
-        <div class="skill-container" id="spirit">
+        <div class="skill-container" >
             <div class="skill">
-                <h2 contenteditable="true">Spirit</h2>
-                <div class="level-counter">Level: <span id="spirit-level">1</span></div>
+                <h2 contenteditable="true" id="spirit">Spirit</h2>
+                <div class="level-counter">Level&nbsp;&nbsp;<span id="spirit-level">1</span></div>
             </div>
             <div class="elements">
                 <button class="add-button" onclick="addXP('spirit')">Add <br>XP</br></button>
@@ -36,10 +35,10 @@
                 </div>
             </div>
         </div>
-        <div class="skill-container" id="coding">
+        <div class="skill-container">
             <div class="skill">
-                <h2 contenteditable="true">Coding</h2>
-                <div class="level-counter">Level: <span id="coding-level">1</span></div>
+                <h2 contenteditable="true" id="coding">Coding</h2>
+                <div class="level-counter">Level&nbsp;&nbsp;<span id="coding-level">1</span></div>
             </div>
             <div class="elements">
                 <button class="add-button" onclick="addXP('coding')">Add <br>XP</br></button>
@@ -49,10 +48,10 @@
                 </div>
             </div>
         </div>
-        <div class="skill-container" id="french">
+        <div class="skill-container">
             <div class="skill">
-                <h2 contenteditable="true">French</h2>
-                <div class="level-counter">Level: <span id="french-level">1</span></div>
+                <h2 contenteditable="true" id="french">French</h2>
+                <div class="level-counter">Level&nbsp;&nbsp;<span id="french-level">1</span></div>
             </div>
             <div class="elements">
                 <button class="add-button" onclick="addXP('french')">Add <br>XP</br></button>
@@ -62,6 +61,7 @@
                 </div>
             </div>
         </div>
+        <a href="https://www.buymeacoffee.com/vandijckeph"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=vandijckeph&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
         <script src="script.js"></script>
     </body>
     </html>
