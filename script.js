@@ -87,7 +87,7 @@ function saveProgressToLocalStorage() {
         let level = skill.querySelector('.level-counter span').textContent;
         let xpWidth = skill.querySelector('.xp-progress').style.width;
 
-        progressData[skillName] = { level, xpWidth };
+        progressData[skillInput.id] = { skillName, level, xpWidth };
     });
 
     // Save progress data to local storage
@@ -104,14 +104,13 @@ function loadProgressFromLocalStorage() {
 
         skills.forEach(skill => {
             let skillInput = skill.querySelector('input[type="text"]');
-            let skillName = skillInput.id;
-            let levelSpan = skill.querySelector('.level-counter span');
-            let progressDiv = skill.querySelector('.xp-progress');
-
-            if (progressData.hasOwnProperty(skillName)) {
-                skillInput.value = skillName;
-                levelSpan.textContent = progressData[skillName].level;
-                progressDiv.style.width = progressData[skillName].xpWidth;
+            let skillId = skillInput.id;
+            if (progressData.hasOwnProperty(skillId)) {
+                let levelSpan = skill.querySelector('.level-counter span');
+                let progressDiv = skill.querySelector('.xp-progress');
+                skillInput.value = progressData[skillId].skillName;
+                levelSpan.textContent = progressData[skillId].level;
+                progressDiv.style.width = progressData[skillId].xpWidth;
             }
         });
     }
