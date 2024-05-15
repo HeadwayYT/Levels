@@ -3,7 +3,7 @@ function addXP(skill) {
     let levelSpan = document.getElementById(skill + '-level');
     let progressDiv = document.getElementById(skill + '-progress').firstElementChild;
     let currentLevel = parseInt(levelSpan.textContent);
-    let xpToAdd = 10; // Each tap adds 20% to the XP bar
+    let xpToAdd = 20; // Each tap adds 20% to the XP bar
     let maxXP = 100; // XP required to level up
 
     // Calculate the new width of the XP progress bar
