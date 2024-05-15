@@ -72,12 +72,12 @@ span {
 .add-button {
   font-size: 1.5rem;
   font-weight: bold;
-  background-color:rgb(7, 161, 59);
+  background: radial-gradient(circle, rgb(15, 233, 87), rgb(6, 158, 57));
   border-radius: 50px;
   border-color: rgb(255, 255, 255);
 }
 
-.Remove {
+.remove-button {
   font-size: 1rem;
   font-weight: bold;
   height: 30px;

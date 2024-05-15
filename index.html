@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Skill Bars</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <h1>- Levels -</h1>
-        <p>This is a tool to keep track of your real-life skills <br> 1. Adjust the skillnames to your liking <br>2. Define tasks per skill that deserve XP</br>3. Every time you perform a task you add XP to that skill</br></p>
-        <div class="skill-container">
-            <div class="skill">
-                <h2 contenteditable="true" id="strength">Strength</h2>
-                <div class="level-counter">Level&nbsp;&nbsp;<span id="strength-level">1</span></div>
-            </div>
-            <div class="elements">
-                <button class="add-button" onclick="addXP('strength')">Add <br>XP</br></button>
-                <button class="Remove" onclick="remXP('strength')">Undo</button>
-                <div class="bar" id="strength-progress">
-                    <div class="xp-progress"></div>
-                </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill Bars</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>- Levels -</h1>
+    <p>This is a tool to keep track of your real-life skills <br> 1. Adjust the skillnames to your liking <br>2. Define tasks per skill that deserve XP</br>3. Every time you perform a task you add XP to that skill</br></p>
+    <div class="skill-container">
+        <div class="skill">
+            <h2 contenteditable="true" id="strength">Strength</h2>
+            <div class="level-counter">Level&nbsp;&nbsp;<span id="strength-level">1</span></div>
+        </div>
+        <div class="elements">
+            <button class="add-button">Add <br>XP</br></button>
+            <button class="remove-button">Undo</button>
+            <div class="bar" id="strength-progress">
+                <div class="xp-progress"></div>
             </div>
         </div>
-        <div class="skill-container" >
-            <div class="skill">
-                <h2 contenteditable="true" id="spirit">Spirit</h2>
-                <div class="level-counter">Level&nbsp;&nbsp;<span id="spirit-level">1</span></div>
-            </div>
-            <div class="elements">
-                <button class="add-button" onclick="addXP('spirit')">Add <br>XP</br></button>
-                <button class="Remove" onclick="remXP('spirit')">Undo</button>
-                <div class="bar" id="spirit-progress">
-                    <div class="xp-progress"></div>
-                </div>
+    </div>
+    <div class="skill-container">
+        <div class="skill">
+            <h2 contenteditable="true" id="spirit">Spirit</h2>
+            <div class="level-counter">Level&nbsp;&nbsp;<span id="spirit-level">1</span></div>
+        </div>
+        <div class="elements">
+            <button class="add-button">Add <br>XP</br></button>
+            <button class="remove-button">Undo</button>
+            <div class="bar" id="spirit-progress">
+                <div class="xp-progress"></div>
             </div>
         </div>
-        <div class="skill-container">
-            <div class="skill">
-                <h2 contenteditable="true" id="coding">Coding</h2>
-                <div class="level-counter">Level&nbsp;&nbsp;<span id="coding-level">1</span></div>
-            </div>
-            <div class="elements">
-                <button class="add-button" onclick="addXP('coding')">Add <br>XP</br></button>
-                <button class="Remove" onclick="remXP('coding')">Undo</button>
-                <div class="bar" id="coding-progress">
-                    <div class="xp-progress"></div>
-                </div>
+    </div>
+    <div class="skill-container">
+        <div class="skill">
+            <h2 contenteditable="true" id="coding">Coding</h2>
+            <div class="level-counter">Level&nbsp;&nbsp;<span id="coding-level">1</span></div>
+        </div>
+        <div class="elements">
+            <button class="add-button">Add <br>XP</br></button>
+            <button class="remove-button">Undo</button>
+            <div class="bar" id="coding-progress">
+                <div class="xp-progress"></div>
             </div>
         </div>
-        <div class="skill-container">
-            <div class="skill">
-                <h2 contenteditable="true" id="french">French</h2>
-                <div class="level-counter">Level&nbsp;&nbsp;<span id="french-level">1</span></div>
-            </div>
-            <div class="elements">
-                <button class="add-button" onclick="addXP('french')">Add <br>XP</br></button>
-                <button class="Remove" onclick="remXP('french')">Undo</button>
-                <div class="bar" id="french-progress">
-                    <div class="xp-progress"></div>
-                </div>
+    </div>
+    <div class="skill-container">
+        <div class="skill">
+            <h2 contenteditable="true" id="french">French</h2>
+            <div class="level-counter">Level&nbsp;&nbsp;<span id="french-level">1</span></div>
+        </div>
+        <div class="elements">
+            <button class="add-button">Add <br>XP</br></button>
+            <button class="remove-button">Undo</button>
+            <div class="bar" id="french-progress">
+                <div class="xp-progress"></div>
             </div>
         </div>
-        <a href="https://www.buymeacoffee.com/vandijckeph"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=vandijckeph&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
-        <script src="script.js"></script>
-    </body>
-    </html>
+    </div>
+    <a href="https://www.buymeacoffee.com/vandijckeph"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=vandijckeph&button_colour=5F7FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" /></a>
+    <script src="script.js"></script>
+</body>
+</html>

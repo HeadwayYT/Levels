@@ -37,7 +37,7 @@ function addXP(skill) {
         if (!progressDiv.parentNode.classList.contains('neon-effect')) {
             playAddXPSound();
         }
-        
+
         // Update the progress bar width with animation
         progressDiv.classList.add('progress-bar');
         progressDiv.style.width = newWidth + '%';
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let addButtons = document.querySelectorAll('.add-button');
     addButtons.forEach(button => {
         button.addEventListener('click', function() {
-            let skill = this.parentElement.parentElement.id; // changed here
+            let skill = this.parentElement.parentElement.querySelector('h2').id; // changed here
             addXP(skill);
         });
     });
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let removeButtons = document.querySelectorAll('.remove-button'); // changed here
     removeButtons.forEach(button => {
         button.addEventListener('click', function() {
-            let skill = this.parentElement.parentElement.id; // changed here
+            let skill = this.parentElement.parentElement.querySelector('h2').id; // changed here
             remXP(skill);
         });
     });
