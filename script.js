@@ -80,19 +80,18 @@ function remXP(skill) {
 function saveProgressToLocalStorage() {
     let skills = document.querySelectorAll('.skill-container');
     let progressData = {};
-    let skillNames = [];
 
     skills.forEach(skill => {
-        let skillName = skill.querySelector('h2').textContent;
-        skillNames.push(skillName); // Store skill name
+        let skillInput = skill.querySelector('input[type="text"]');
+        let skillName = skillInput.value;
         let level = skill.querySelector('.level-counter span').textContent;
         let xpWidth = skill.querySelector('.xp-progress').style.width;
 
         progressData[skillName] = { level, xpWidth };
     });
 
-    // Save both skill names and progress data
-    localStorage.setItem('skillData', JSON.stringify({ progressData, skillNames }));
+    // Save progress data to local storage
+    localStorage.setItem('skillData', JSON.stringify(progressData));
 }
 
 // Load data from local storage
@@ -100,30 +99,22 @@ function loadProgressFromLocalStorage() {
     let skillDataString = localStorage.getItem('skillData');
 
     if (skillDataString) {
-        let { progressData, skillNames } = JSON.parse(skillDataString);
+        let progressData = JSON.parse(skillDataString);
         let skills = document.querySelectorAll('.skill-container');
 
         skills.forEach(skill => {
-            let h2 = skill.querySelector('h2');
-            if (h2 && skillNames.includes(h2.textContent)) {
-                let levelSpan = skill.querySelector('.level-counter span');
-                let progressDiv = skill.querySelector('.xp-progress');
+            let skillInput = skill.querySelector('input[type="text"]');
+            let skillName = skillInput.id;
+            let levelSpan = skill.querySelector('.level-counter span');
+            let progressDiv = skill.querySelector('.xp-progress');
 
-                levelSpan.textContent = progressData[h2.textContent].level;
-                progressDiv.style.width = progressData[h2.textContent].xpWidth;
+            if (progressData.hasOwnProperty(skillName)) {
+                skillInput.value = skillName;
+                levelSpan.textContent = progressData[skillName].level;
+                progressDiv.style.width = progressData[skillName].xpWidth;
             }
         });
     }
-}
-
-// Function to get current skill names
-function getSkillNames() {
-    let skillNames = [];
-    let skills = document.querySelectorAll('.skill-container h2');
-    skills.forEach(skill => {
-        skillNames.push(skill.textContent);
-    });
-    return skillNames;
 }
 
 // Function to play level up sound
@@ -134,24 +125,24 @@ function playLevelUpSound() {
 
 // Function to play sound effect when adding XP
 function playAddXPSound() {
-    let sound = new Audio('win2.mp3'); // Replace 'add_xp_sound.mp3' with the path to your sound effect
+    let sound = new Audio('win2.mp3');
     sound.play();
 }
 
 // Event listeners for add and remove buttons
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
     let addButtons = document.querySelectorAll('.add-button');
     addButtons.forEach(button => {
         button.addEventListener('click', function() {
-            let skill = this.parentElement.parentElement.querySelector('h2').id; // changed here
+            let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
             addXP(skill);
         });
     });
 
-    let removeButtons = document.querySelectorAll('.remove-button'); // changed here
+    let removeButtons = document.querySelectorAll('.remove-button');
     removeButtons.forEach(button => {
         button.addEventListener('click', function() {
-            let skill = this.parentElement.parentElement.querySelector('h2').id; // changed here
+            let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
             remXP(skill);
         });
     });
@@ -164,8 +155,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 window.addEventListener('beforeunload', saveProgressToLocalStorage);
 
 // Event listener to detect changes in skill names
-document.querySelectorAll('.skill-container h2').forEach(skillName => {
-    skillName.addEventListener('input', function() {
+document.querySelectorAll('.skill-container input[type="text"]').forEach(skillInput => {
+    skillInput.addEventListener('input', function() {
         saveProgressToLocalStorage(); // Save progress when a skill name is changed
     });
 });

@@ -12,10 +12,10 @@ h1 {
   margin: 20px auto;
 }
 
-h2 {
+input {
   font-weight: bold;
   font-size: 1.75rem;
-  width: 125px;
+  width: 130px;
 }
 
 a {
