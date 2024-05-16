@@ -32,20 +32,23 @@ function addXP(skill) {
     let xpToAdd = 20; // Each tap adds 20% to the XP bar
     let maxXP = 100; // XP required to level up
 
+    // Check if the progress bar is currently animating
+    if (progressDiv.classList.contains('progress-bar')) {
+        return; // Exit the function if the progress bar is still animating
+    }
+
     // Calculate the new width of the XP progress bar
     let currentWidth = parseInt(progressDiv.style.width.slice(0, -1)) || 0;
     let newWidth = currentWidth + xpToAdd;
 
     // Check if the bar is full
     if (newWidth >= maxXP) {
-        // Increase the level
-        currentLevel++;
-        levelSpan.textContent = currentLevel.toString();
-        // Play level up sound
-        playLevelUpSound();
-        // Add neon effect
-        progressDiv.parentNode.classList.add('neon-effect');
-        // Reset the progress bar with animation
+        // Play sound effect when adding XP only if level up animation is not playing
+        if (!progressDiv.parentNode.classList.contains('neon-effect')) {
+            playAddXPSound();
+        }
+
+        // Update the progress bar width with animation
         progressDiv.classList.add('progress-bar');
         progressDiv.style.width = '100%';
         setTimeout(function() {
@@ -53,10 +56,18 @@ function addXP(skill) {
             progressDiv.classList.remove('progress-bar');
             // Reset the width
             progressDiv.style.width = '0%';
+            // Increase the level
+            currentLevel++;
+            levelSpan.textContent = currentLevel.toString();
+            // Play level up sound
+            playLevelUpSound();
+            // Add neon effect
+            progressDiv.parentNode.classList.add('neon-effect');
             // Remove neon effect after some time
             setTimeout(function() {
                 progressDiv.parentNode.classList.remove('neon-effect');
-            }, 300); // Neon effect lasts for 2 seconds
+            }, 300); // Neon effect lasts for 0.3 seconds
+            saveProgressToLocalStorage(); // Save progress after level up animation completes
         }, 500); // Duration of the animation (same as CSS transition duration)
     } else {
         // Play sound effect when adding XP only if level up animation is not playing
@@ -71,7 +82,6 @@ function addXP(skill) {
             progressDiv.classList.remove('progress-bar');
         }, 500); // Duration of the animation (same as CSS transition duration)
     }
-    saveProgressToLocalStorage(); // Save progress after adding XP
 }
 
 // Function to remove experience points
