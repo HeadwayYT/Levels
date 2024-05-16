@@ -10,6 +10,11 @@ h1 {
   text-align: center;
   font-size: 3rem;
   margin: 20px auto;
+  padding: 20px; /* Add padding for spacing */
+  border-radius: 10px; /* Add rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  background: linear-gradient(to right, #ffd700, #d8a830); /* Gradient background */
+  color: white; /* Text color */
 }
 
 .button-container {
