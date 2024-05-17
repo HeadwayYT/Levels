@@ -17,7 +17,13 @@ h1 {
   color: white; /* Text color */
 }
 
-.button-container {
+.add-skill-button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.explanation-button {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
@@ -37,6 +43,7 @@ h1 {
 #toggleExplanation:hover {
   background-color: #242425;
 }
+
 
 .hidden {
   display: none;
