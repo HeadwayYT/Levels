@@ -1,30 +1,149 @@
-// JavaScript for toggling explanation paragraph
-const explanation = document.getElementById('explanation');
-const toggleButton = document.getElementById('toggleExplanation');
+document.addEventListener('DOMContentLoaded', function() {
+    // Load progress when the document is loaded
+    loadProgressFromLocalStorage();
 
-// Check if the explanation state is stored in localStorage
-const isExplanationHidden = localStorage.getItem('isExplanationHidden');
+    // Event listener for add and remove buttons
+    let addButtons = document.querySelectorAll('.add-button');
+    addButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
+            addXP(skill);
+        });
+    });
 
-// If the explanation state is hidden in localStorage, hide it on page load
-if (isExplanationHidden === 'true') {
-    explanation.classList.add('hidden');
-    toggleButton.textContent = 'Show Explanation';
-}
+    let removeButtons = document.querySelectorAll('.remove-button');
+    removeButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
+            remXP(skill);
+        });
+    });
 
-toggleButton.addEventListener('click', function() {
-    explanation.classList.toggle('hidden');
-    if (explanation.classList.contains('hidden')) {
-        toggleButton.textContent = 'Show Explanation';
-        // Store the hidden state in localStorage
-        localStorage.setItem('isExplanationHidden', 'true');
-    } else {
-        toggleButton.textContent = 'Hide Explanation';
-        // Remove the hidden state from localStorage
-        localStorage.removeItem('isExplanationHidden');
-    }
+    // Event listener to add new skill
+    document.getElementById('addSkillButton').addEventListener('click', addNewSkill);
 });
 
-// Function to add experience points
+function addNewSkill() {
+    const skillContainer = document.createElement('div');
+    skillContainer.classList.add('skill-container');
+    skillContainer.innerHTML = `
+        <div class="skill">
+            <input type="text" placeholder="New Skill...">
+            <div class="level-counter">&nbsp&nbspLevel&nbsp;&nbsp;<span>1</span></div>
+            <button class="remove-skill-button">Remove Skill</button>
+        </div>
+        <div class="elements">
+            <button class="add-button">Add <br>XP</br></button>
+            <button class="remove-button">Undo</button>
+            <div class="bar">
+                <div class="xp-progress"></div>
+            </div>
+        </div>
+    `;
+
+    // Append new skill container to the DOM under the existing skills
+    const skillContainers = document.querySelectorAll('.skill-container');
+    const lastSkillContainer = skillContainers[skillContainers.length - 1];
+    lastSkillContainer.parentNode.insertBefore(skillContainer, lastSkillContainer.nextSibling);
+
+    // Add event listeners to new buttons
+    skillContainer.querySelector('.add-button').addEventListener('click', function() {
+        let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
+        addXP(skill);
+    });
+
+    skillContainer.querySelector('.remove-button').addEventListener('click', function() {
+        let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
+        remXP(skill);
+    });
+
+    skillContainer.querySelector('.remove-skill-button').addEventListener('click', function() {
+        let skillContainer = this.parentElement.parentElement;
+        removeSkill(skillContainer);
+    });
+
+    // Add unique ID to new skill input
+    const newSkillInput = skillContainer.querySelector('input[type="text"]');
+    newSkillInput.id = `skill-${Date.now()}`;
+    newSkillInput.addEventListener('input', saveProgressToLocalStorage);
+
+    // Save progress after adding a new skill
+    saveProgressToLocalStorage();
+}
+
+function saveProgressToLocalStorage() {
+    let skills = document.querySelectorAll('.skill-container');
+    let progressData = {};
+
+    skills.forEach(function(skill) {
+        let skillInput = skill.querySelector('input[type="text"]');
+        let skillName = skillInput.value;
+        let level = skill.querySelector('.level-counter span').textContent;
+        let xpWidth = skill.querySelector('.xp-progress').style.width;
+
+        progressData[skillInput.id] = { skillName, level, xpWidth };
+    });
+
+    // Save progress data to local storage
+    localStorage.setItem('skillData', JSON.stringify(progressData));
+}
+
+function loadProgressFromLocalStorage() {
+    let skillDataString = localStorage.getItem('skillData');
+
+    if (skillDataString) {
+        let progressData = JSON.parse(skillDataString);
+        for (let skillId in progressData) {
+            if (progressData.hasOwnProperty(skillId)) {
+                addSkillToDOM(skillId, progressData[skillId].skillName, progressData[skillId].level, progressData[skillId].xpWidth);
+            }
+        }
+    }
+}
+
+function addSkillToDOM(skillId, skillName, level, xpWidth) {
+    const skillContainer = document.createElement('div');
+    skillContainer.classList.add('skill-container');
+    skillContainer.innerHTML = `
+        <div class="skill">
+            <input type="text" id="${skillId}" value="${skillName}" placeholder="New Skill...">
+            <div class="level-counter">&nbsp&nbspLevel&nbsp;&nbsp;<span>${level}</span></div>
+            <button class="remove-skill-button">Remove Skill</button>
+        </div>
+        <div class="elements">
+            <button class="add-button">Add <br>XP</br></button>
+            <button class="remove-button">Undo</button>
+            <div class="bar">
+                <div class="xp-progress" style="width: ${xpWidth};"></div>
+            </div>
+        </div>
+    `;
+
+    // Append new skill container to the DOM under the existing skills
+    const skillContainers = document.querySelectorAll('.skill-container');
+    const lastSkillContainer = skillContainers[skillContainers.length - 1];
+    lastSkillContainer.parentNode.insertBefore(skillContainer, lastSkillContainer.nextSibling);
+
+    // Add event listeners to new buttons
+    skillContainer.querySelector('.add-button').addEventListener('click', function() {
+        let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
+        addXP(skill);
+    });
+
+    skillContainer.querySelector('.remove-button').addEventListener('click', function() {
+        let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
+        remXP(skill);
+    });
+
+    skillContainer.querySelector('.remove-skill-button').addEventListener('click', function() {
+        let skillContainer = this.parentElement.parentElement;
+        removeSkill(skillContainer);
+    });
+
+    // Add event listener to new skill input
+    skillContainer.querySelector('input[type="text"]').addEventListener('input', saveProgressToLocalStorage);
+}
+
 function addXP(skill) {
     let levelSpan = document.getElementById(skill + '-level');
     let progressDiv = document.getElementById(skill + '-progress').firstElementChild;
@@ -84,7 +203,6 @@ function addXP(skill) {
     }
 }
 
-// Function to remove experience points
 function remXP(skill) {
     let levelSpan = document.getElementById(skill + '-level');
     let progressDiv = document.getElementById(skill + '-progress').firstElementChild;
@@ -97,101 +215,35 @@ function remXP(skill) {
 
     // Check if the bar is empty and level is greater than 1
     if (newWidth < 0 && currentLevel > 1) {
+        // Set the width to 0% (empty bar)
+        progressDiv.style.width = '0%';
         // Decrease the level
         currentLevel--;
         levelSpan.textContent = currentLevel.toString();
-        // Set the progress bar to full (just below level up)
-        newWidth = 80;
-    } else if (newWidth < 0) {
-        // Prevent the bar from going negative
-        newWidth = 0;
+        // Set the progress bar to 80% (since we are removing 20%)
+        progressDiv.style.width = '80%';
+    } else if (newWidth >= 0) {
+        // Update the progress bar width
+        progressDiv.style.width = newWidth + '%';
     }
 
-    // Update the progress bar width
-    progressDiv.style.width = newWidth + '%';
-    saveProgressToLocalStorage(); // Save progress after removing XP
-}
-
-// Save data to local storage
-function saveProgressToLocalStorage() {
-    let skills = document.querySelectorAll('.skill-container');
-    let progressData = {};
-
-    skills.forEach(function(skill) {
-        let skillInput = skill.querySelector('input[type="text"]');
-        let skillName = skillInput.value;
-        let level = skill.querySelector('.level-counter span').textContent;
-        let xpWidth = skill.querySelector('.xp-progress').style.width;
-
-        progressData[skillInput.id] = { skillName, level, xpWidth };
-    });
-
-    // Save progress data to local storage
-    localStorage.setItem('skillData', JSON.stringify(progressData));
-}
-
-// Load data from local storage
-function loadProgressFromLocalStorage() {
-    let skillDataString = localStorage.getItem('skillData');
-
-    if (skillDataString) {
-        let progressData = JSON.parse(skillDataString);
-        let skills = document.querySelectorAll('.skill-container');
-
-        skills.forEach(function(skill) {
-            let skillInput = skill.querySelector('input[type="text"]');
-            let skillId = skillInput.id;
-            if (progressData.hasOwnProperty(skillId)) {
-                let levelSpan = skill.querySelector('.level-counter span');
-                let progressDiv = skill.querySelector('.xp-progress');
-                skillInput.value = progressData[skillId].skillName;
-                levelSpan.textContent = progressData[skillId].level;
-                progressDiv.style.width = progressData[skillId].xpWidth;
-            }
-        });
-    }
+    saveProgressToLocalStorage();
 }
 
 // Function to play level up sound
 function playLevelUpSound() {
-    let sound = new Audio('win.mp3');
+    let sound = new Audio('sounds/level-up-sound.mp3');
     sound.play();
 }
 
-// Function to play sound effect when adding XP
+// Function to play add XP sound
 function playAddXPSound() {
-    let sound = new Audio('win2.mp3');
+    let sound = new Audio('sounds/add-xp-sound.mp3');
     sound.play();
 }
 
-// Event listeners for add and remove buttons
-document.addEventListener('DOMContentLoaded', function() {
-    let addButtons = document.querySelectorAll('.add-button');
-    addButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
-            addXP(skill);
-        });
-    });
-
-    let removeButtons = document.querySelectorAll('.remove-button');
-    removeButtons.forEach(function(button) {
-        button.addEventListener('click', function() {
-            let skill = this.parentElement.parentElement.querySelector('input[type="text"]').id;
-            remXP(skill);
-        });
-    });
-
-    // Load progress when the document is loaded
-    loadProgressFromLocalStorage();
-});
-
-// Save progress before the page unloads
-window.addEventListener('beforeunload', saveProgressToLocalStorage);
-
-// Event listener to detect changes in skill names
-document.querySelectorAll('.skill-container input[type="text"]').forEach(function(skillInput) {
-    skillInput.addEventListener('input', function() {
-        saveProgressToLocalStorage(); // Save progress when a skill name is changed
-    });
-});
+// Function to remove a skill container
+function removeSkill(skillContainer) {
+    skillContainer.remove();
+    saveProgressToLocalStorage();
+}
